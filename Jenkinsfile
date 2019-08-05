@@ -1,5 +1,5 @@
 
-pipeline{
+Pipeline{
   stages{
     stage('inicializacion'){
       steps{
