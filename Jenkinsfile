@@ -1,26 +1,37 @@
-
-pipeline{
-  stages{
-    stage('inicializacion'){
-      steps{
-        echo 'inicializando'
+pipeline {
+  agent any
+  stages {
+    stage ('Inicializacion') {
+      steps {
+        echo 'Inicializando pipeline'
       }
     }
-    stage('pruebas unitarias'){
-      steps{
-        echo 'realizando pruebas'
+    stage ('Pruebas Unitarias') {
+      steps {
+        echo 'Realizando Pruebas'
       }
     }
-    stage('construccion'){
-      steps{
-        echo 'construyendo'
+    stage ('Construccion') {
+      steps {
+        echo 'Construyendo imagen'
       }
     }
-    stage('publicacion'){
-      steps{
-        echo 'publicando'
+    stage ('Publicacion') {
+      steps {
+        echo 'Publicando imagen'
+      }
+    }
+    stage ('Aprobacion') {
+      steps {
+        timeout(time:5, unit:'DAYS'){
+          input message: 'Aprobar Despliegue Canary?', submitter: 'DevOps'
+        }
+      }
+    }
+    stage ('Despliegue Produccion') {
+      steps {
+        echo 'Despliegue Produccion'
       }
     }
   }
 }
-    
